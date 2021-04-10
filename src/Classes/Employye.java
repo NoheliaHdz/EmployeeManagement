@@ -1,5 +1,7 @@
 package Classes;
 
+import Business.BusinessUnit;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,19 +9,32 @@ public class Employye {
     private String name;
     private String lastname;
     private int age;
-    private String id;
+    private String Id;
     private String email;
+    private Supervisor mi_supervisor;
+    protected float salary;
+    private BusinessUnit bu;
 
-    public Employye(String na, String lastna, String id, int ag,String emai){
-        this.name=na;
-        this.lastname=lastna;
-        this.age=ag;
-        this.id=id;
+//pienso que deberiamos de limpiar la funcion de businessUnit para que al momento de cambiar entre ingenieer y Marketing no se encuentre problemas
+    //
+
+    public Employye(String id, String name, String lastname, int age,String emai) {
+        this.Id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.setAge(age);
+        this.salary = 0;
         this.email=emai;
     }
 
-    public Employye(){
 
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        this.Id = id;
     }
 
     public String getName() {
@@ -30,14 +45,6 @@ public class Employye {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(short age) {
-        this.age = age;
-    }
-
     public String getLastname() {
         return lastname;
     }
@@ -46,12 +53,38 @@ public class Employye {
         this.lastname = lastname;
     }
 
-    public String getId() {
-        return id;
+    public int getAge() {
+        return age;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setAge(int age) {
+        if( age <= 1 || age >= 100 ){
+            age = 1;
+            System.out.println("WARNING: EL valor enviado no se encuentra de los rangos espesificados [1,99], POR LO TANTO EL VALOR FUE SET CON 1");
+        }
+        this.age = age;
+    }
+
+    public Supervisor getMi_supervisor() {
+        return this.mi_supervisor;
+    }
+
+    public void setMi_supervisor(Supervisor mi_supervisor) {
+
+        this.mi_supervisor = mi_supervisor;
+    }
+
+    public String Presentation(){
+        return this.Id + " - " + this.name + " " + this.lastname;
+    }
+
+    public BusinessUnit getBu() {
+        return this.bu;
+    }
+
+    public void setBu(BusinessUnit bu) {
+
+        this.bu = bu;
     }
 
     public String getEmail() {
